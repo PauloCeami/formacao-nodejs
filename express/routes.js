@@ -15,6 +15,11 @@ app.get('/produto', function (req, res) {
     res.send('cadastro de produtos');
 })
 
+app.get('/produto/{id}', function (req, res) {
+    res.send('cadastro de produtos');
+})
+
+
 app.listen(8181, function (error) {
     if (error) {
         console.log('Impossícel iniciar o servidor')
