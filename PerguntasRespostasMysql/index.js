@@ -9,8 +9,13 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 app.get('/', function (req, res) {
-    res.render('perguntas/form-perguntas');
-})
+
+    var title = 'Home - Perguntas e Respostas - NodeJs';
+
+    res.render('perguntas/form-perguntas', {
+        'title': title
+    });
+});
 
 
 app.listen(8181, function (error) {
