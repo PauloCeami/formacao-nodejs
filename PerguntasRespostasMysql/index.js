@@ -1,7 +1,8 @@
 const express = require('express'); // import express
 const app = express(); // iniciando express
 
-// Express use ejs with view engine
+
+// Set the default templating engine to ejs
 app.set('view engine', 'ejs');
 
 // permite usar arquivos estaticos
