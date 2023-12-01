@@ -8,8 +8,9 @@ app.get('/:nome?', function (req, res) {
 
     var nome = req.params.nome;
 
-    res.render('index', {
-        nome: nome
+    res.render('condicionais', {
+        nome: nome,
+        is_mostrar: false
     });
 })
 
