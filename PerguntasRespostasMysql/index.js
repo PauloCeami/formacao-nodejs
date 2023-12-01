@@ -4,11 +4,14 @@ const app = express(); // iniciando express
 // Express use ejs with view engine
 app.set('view engine', 'ejs');
 
+// permite usar arquivos estaticos
+app.use(express.static('public'));
+
 app.get('/:nome?', function (req, res) {
 
     var nome = req.params.nome;
 
-    res.render('foreach', {
+    res.render('staticfile', {
         nome: nome,
         is_mostrar: false,
         produtos: [
