@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  web:
+    image: webdevops/php-apache:7.3-alpine
+    ports:
+      - "8888:80"
+    volumes:
+      - ./www:/app
+
+  db:
+    image: mysql
+    ports:
+      - "3336:3306"
+    expose:
+      - 3336
+    command: ['--default-authentication-plugin=mysql_native_password','--character-set-server=utf8mb4', '--collation-server=utf8mb4_general_ci']
+    restart: always
+    environment:
+      MYSQL_DATABASE: formacaonodejs
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+       - ./dump:/docker-entrypoint-initdb.d
+       - .db:/var/lib/mysql
+    
+        
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8080:80"
