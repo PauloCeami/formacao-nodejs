@@ -9,7 +9,7 @@ const POLLMAX = 5;
 const POOMIN = 0;
 const POOLACQUIRE = 30000;
 const POOLIDLE = 10000;
-const PORT = 3336; // port container docker  expose: - 3336
+const PORT = 3306; // port container docker  expose: - 3336
 
 module.exports =  conection = new Sequelize(DB, USER, PASSWORD,
     {

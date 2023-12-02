@@ -5,3 +5,4 @@
 /.dump/
 /.containnerMysqlDocker/*
 /.containnerMysqlDocker/
+/PerguntasRespostasMysql/.containnerMysqlDocker/*
