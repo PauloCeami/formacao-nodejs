@@ -1,6 +1,21 @@
+const conection = require('./model/mysql.conection.js');
 const express = require('express'); // import express
 const app = express(); // iniciando express
 const bodyParser = require('body-parser');
+
+
+async function asyncConection() {
+    try {
+        await conection.authenticate();
+        console.log('Connection mysql successfully');
+    } catch (error) {
+        console.error('Failed conection muysql ::: ', error);
+    }
+}
+
+let asyncasyncConectionTest = asyncConection()
+console.log(asyncasyncConectionTest)
+
 
 
 
