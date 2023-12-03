@@ -14,6 +14,8 @@ const Pergunta = conection.define(modelName, {
     }
 });
 
-Pergunta.sync({ force: true }).then(() => {
+Pergunta.sync({ force: false }).then(() => {
     console.log('########################################### TABLE PERGUNTAS CREATED ############################################## ');
 });
+
+module.exports = Pergunta;

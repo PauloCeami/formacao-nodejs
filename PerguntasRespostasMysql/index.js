@@ -3,7 +3,7 @@ const express = require('express'); // import express
 const app = express(); // iniciando express
 const bodyParser = require('body-parser');
 
-const Pergunta = require('./model/PerguntasModel.js');
+const Pergunta = require('./model/Pergunta.model.js');
 
 
 async function asyncConection() {
@@ -30,24 +30,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-
     var title = 'Home - Perguntas e Respostas - NodeJs';
-
-
-
-
     res.render('perguntas/form-perguntas', {
         'title': title
     });
 });
 
 
-app.post('/store', (req, res) => {
-
-    var titulo = req.body.titulo;
-    var descricao = req.body.descricao;
-
-})
+app.post('/store', async (req, res) => {
+    const perg = await Pergunta.create({
+        titulo: req.body.titulo,
+        descricao: req.body.descricao,
+    });
+    console.log("Pergunta auto-generated ID:", perg.id);
+    res.redirect('/');
+});
 
 app.listen(8181, function (error) {
     if (error) {
