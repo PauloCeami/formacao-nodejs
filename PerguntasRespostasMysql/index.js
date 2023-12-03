@@ -32,7 +32,7 @@ app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
     var title = 'Home - Perguntas e Respostas - NodeJs';
-    Pergunta.findAll({ raw: true }).then(perguntas => {
+    Pergunta.findAll({ raw: true ,order:[['id','DESC']]}).then(perguntas => {
         res.render('perguntas/form-perguntas', {
             'title': title,
             perguntas: perguntas
