@@ -29,13 +29,16 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
 app.get('/', (req, res) => {
     var title = 'Home - Perguntas e Respostas - NodeJs';
-    res.render('perguntas/form-perguntas', {
-        'title': title
+    Pergunta.findAll({ raw: true }).then(perguntas => {
+        res.render('perguntas/form-perguntas', {
+            'title': title,
+            perguntas: perguntas
+        });
     });
 });
-
 
 app.post('/store', async (req, res) => {
     const perg = await Pergunta.create({
