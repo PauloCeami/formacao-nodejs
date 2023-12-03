@@ -3,20 +3,20 @@ const express = require('express'); // import express
 const app = express(); // iniciando express
 const bodyParser = require('body-parser');
 
+const Pergunta = require('./model/PerguntasModel.js');
+
 
 async function asyncConection() {
     try {
         await conection.authenticate();
-        console.log('Connection mysql successfully');
+        console.log(' ############################################### Connection mysql successfully ###########################################');
     } catch (error) {
         console.error('Failed conection muysql ::: ', error);
     }
 }
 
-let asyncasyncConectionTest = asyncConection()
-console.log(asyncasyncConectionTest)
-
-
+// call authenticate method
+asyncConection();
 
 
 // Set the default templating engine to ejs
@@ -32,6 +32,9 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
 
     var title = 'Home - Perguntas e Respostas - NodeJs';
+
+
+
 
     res.render('perguntas/form-perguntas', {
         'title': title
