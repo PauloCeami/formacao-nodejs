@@ -67,12 +67,14 @@ app.post('/store', async (req, res) => {
 app.get('/show/:id', async (req, res) => {
     var id = req.params.id;
     const pergunta = await Pergunta.findByPk(id, { raw: true });
-    var title = pergunta.titulo + ' - NodeJs';
     if (pergunta != null || pergunta != undefined) {
+        var title = pergunta.titulo + ' - NodeJs';
         res.render('perguntas/edit-pergunta', {
             'title': title,
             pergunta: pergunta
         });
+    } else {
+        res.redirect('/');
     }
 });
 
