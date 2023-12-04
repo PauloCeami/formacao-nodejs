@@ -1,0 +1,30 @@
+<%- include('../partials/header',{title: title}); %>
+    <%- include('../partials/navbar'); %>
+
+        <div class="container-sm mt-3">
+
+            <div class="card mt-3">
+                <div class="card-header">
+                    Perguntas e Respostas
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-outline-primary" href="/create">Nova Pergunta</a>
+                </div>
+            </div>
+
+            <% perguntas.forEach(function(pergunta){ %>
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <%= pergunta.id %> - <%= pergunta.titulo %>
+                    </div>
+                    <div class="card-body">
+                        <%= pergunta.descricao%>
+                            <div class="card-footer text-muted">
+                                <a class="btn btn-sm btn-outline-dark btn-block"
+                                    href="/show/<%= pergunta.id %> ">Responder</a>
+                                Aplicação NodeJs - pauloceami@gmail.com - github.com/pauloceami
+                            </div>
+                    </div>
+                </div>
+                <% })%>
+                    <%- include('../partials/footer'); %>

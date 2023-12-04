@@ -29,10 +29,21 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
+// list all
 app.get('/', (req, res) => {
+    var title = 'Perguntas - Perguntas e Respostas - NodeJs';
+    Pergunta.findAll({ raw: true, order: [['id', 'DESC']] }).then(perguntas => {
+        res.render('perguntas/lista-perguntas', {
+            'title': title,
+            perguntas: perguntas
+        });
+    });
+});
+
+// create
+app.get('/create', (req, res) => {
     var title = 'Home - Perguntas e Respostas - NodeJs';
-    Pergunta.findAll({ raw: true ,order:[['id','DESC']]}).then(perguntas => {
+    Pergunta.findAll({ raw: true, order: [['id', 'DESC']] }).then(perguntas => {
         res.render('perguntas/form-perguntas', {
             'title': title,
             perguntas: perguntas
@@ -40,6 +51,7 @@ app.get('/', (req, res) => {
     });
 });
 
+// store 
 app.post('/store', async (req, res) => {
     const perg = await Pergunta.create({
         titulo: req.body.titulo,
@@ -47,6 +59,21 @@ app.post('/store', async (req, res) => {
     });
     console.log("Pergunta auto-generated ID:", perg.id);
     res.redirect('/');
+});
+
+
+
+// show
+app.get('/show/:id', async (req, res) => {
+    var id = req.params.id;
+    const pergunta = await Pergunta.findByPk(id, { raw: true });
+    var title = pergunta.titulo + ' - NodeJs';
+    if (pergunta != null || pergunta != undefined) {
+        res.render('perguntas/edit-pergunta', {
+            'title': title,
+            pergunta: pergunta
+        });
+    }
 });
 
 app.listen(8181, function (error) {
