@@ -1,34 +1,78 @@
-# Docker + Apache + PHP7.2 + Mysql + phpMyAdmin
+# Treinamento Formação nodejs
 
-Ambiente para desenvolvimento com Docker. Adicione seus projetos a pasta **www**
-
-**Pré requisitos:** Docker e Docker Compose
+**http**
 
 ```
-# Criar e levantar os containers
-docker-compose up -d
+var http = require('http');
 
-# Iniciar o container Docker
-docker-compose start
 
-# Parar o container Docker
-docker-compose stop
+http.createServer(function (req, res) {
+    res.end("Bem vindo ao servidor node")
+}).listen(8181);
 
 ```
 
-**Acesso localhost**
+**Módulos no nodejs - module.exports =**
 
 ```
-http://localhost:4500/myapp
+var objetoCliente = {
+    'nome': 'Pedro',
+    'idade': 16,
+    'data_nascimento': '16/10/2023'
+}
+
+var objetoNome = 'Esta é uma variavel de nome';
+
+
+function soma(a, b) {
+    return a + b;
+}
+
+module.exports = {
+    soma,
+    objetoCliente,
+    objetoNome
+}
+
 
 ```
 
-**Acesso phpMyAdmin**
+**Query Params**
+
 
 ```
-http://localhost:8080
 
-user: root
-senha: root
+app.get('/canal/youtube', function (req, res) {
+
+    //http://localhost:8181/canal/youtube?canal=pauloceami
+    var canal = req.query['canal'];
+
+```
+
+
+**Request Params**
+
+
+```
+
+app.get('/produto/:nome?', function (req, res) {
+
+    var nome = req.params.nome;
+
+```
+
+
+**Definição de Routes**
+
+
+```
+
+app.get('/', function (req, res) {
+    res.send('Bem vindo ao sistema de cadastro');
+})
+
+app.get('/cliente', function (req, res) {
+    res.send('cadastro de cliente');
+})
 
 ```
