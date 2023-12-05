@@ -4,6 +4,8 @@ const app = express(); // iniciando express
 const bodyParser = require('body-parser');
 
 const Pergunta = require('./model/Pergunta.model.js');
+const Resposta = require('./model/Resposta.model.js');
+
 
 
 async function asyncConection() {
@@ -52,12 +54,12 @@ app.get('/create', (req, res) => {
 });
 
 // store 
-app.post('/store', async (req, res) => {
-    const perg = await Pergunta.create({
-        titulo: req.body.titulo,
-        descricao: req.body.descricao,
+app.post('/responder-pergunta', async (req, res) => {
+    const resp = await Resposta.create({
+        resposta: req.body.resposta,
+        pergunta_id: req.body.pergunta_id,
     });
-    console.log("Pergunta auto-generated ID:", perg.id);
+    console.log("Resposta auto-generated ID:", resp.id);
     res.redirect('/');
 });
 
@@ -68,15 +70,34 @@ app.get('/show/:id', async (req, res) => {
     var id = req.params.id;
     const pergunta = await Pergunta.findByPk(id, { raw: true });
     if (pergunta != null || pergunta != undefined) {
-        var title = pergunta.titulo + ' - NodeJs';
-        res.render('perguntas/edit-pergunta', {
-            'title': title,
-            pergunta: pergunta
+
+        var title = 'Responder : ' + pergunta.titulo;
+
+        Resposta.findAll({
+            where: { pergunta_id: pergunta.id },
+            raw: true,
+            order: [['id', 'DESC']]
+        }).then(respostas => {
+            console.log(respostas);
+
+            res.render('perguntas/responder-pergunta', {
+                'title': title,
+                pergunta: pergunta,
+                respostas: respostas
+            });
         });
     } else {
         res.redirect('/');
     }
 });
+
+function hasmany() {
+
+    const resp = Pergunta.hasMany(Resposta, { as: 'respostas' });
+
+    res.getRespostas();
+
+}
 
 app.listen(8181, function (error) {
     if (error) {

@@ -4,21 +4,18 @@
         <div class="container-sm mt-3">
             <div class="card">
                 <div class="card-header">
-                    Editar Pergunta - <%= pergunta.id %> - <%= pergunta.titulo %>
+                    Responder - <%= pergunta.id %> - <%= pergunta.titulo %>
                 </div>
                 <div class="card-body">
-                    <form action="/store" method="POST">
-                        <input type="hidden" name="id" value="<%= pergunta.id %>" class="form-control form-control-sm"
-                                id="formGroupExampleInput" placeholder="título da pergunta">
+                    <form action="/responder-pergunta" method="POST">
+                        <input type="hidden" name="pergunta_id" value="<%= pergunta.id %>"
+                            class="form-control form-control-sm">
+
                         <div class="mb-3">
-                            <label for="formGroupExampleInput" class="form-label">Título</label>
-                            <input type="text" name="titulo" value="<%= pergunta.titulo %>" class="form-control form-control-sm"
-                                id="formGroupExampleInput" placeholder="título da pergunta">
-                        </div>
-                        <div class="mb-3">
-                            <label for="formGroupExampleInput2" class="form-label">Descrição</label>
-                            <input type="text" name="descricao" value="<%= pergunta.descricao %>" class="form-control form-control-sm"
-                                id="formGroupExampleInput2" placeholder="descrição da sua pergunta">
+                            <label for="formGroupExampleInput2" class="form-label">Sua melhor resposta</label>
+                            <input type="text" name="resposta" class="form-control form-control-sm"
+                                id="formGroupExampleInput2"
+                                placeholder="coloque sua resposta da pergunta : '<%= pergunta.titulo %>' aqui ">
                         </div>
                         <div class="d-flex gap-2 mb-3">
                             <button type="submit" class="btn btn-outline-warning btn-sm">
@@ -29,7 +26,7 @@
                                         d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z">
                                     </path>
                                 </svg>
-                                Alterar sua Pergunta
+                                Responder
                             </button>
                             <button type="reset" class="btn btn-outline-dark btn-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -41,7 +38,15 @@
                             </button>
                         </div>
                     </form>
-                </div>                
+                </div>
+                <ul class="list-group">
+                    <% respostas.forEach(function(resp){ %>
+                        <li class="list-group-item">
+                            <%= resp.id %> - <%= resp.resposta %>
+                        </li>
+                        <% })%>
+
+                </ul>
                 <div class="card-footer text-muted">
                     Aplicação NodeJs - pauloceami@gmail.com - github.com/pauloceami
                 </div>
@@ -49,5 +54,5 @@
         </div>
 
 
-       
+
         <%- include('../partials/footer'); %>

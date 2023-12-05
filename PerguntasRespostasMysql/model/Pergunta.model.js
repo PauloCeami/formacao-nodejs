@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const conection = require('./mysql.conection.js');
+const Respostas = require('../model/Resposta.model.js');
 
 const modelName = 'perguntas';
 
